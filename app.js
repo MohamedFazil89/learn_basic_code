@@ -1,13 +1,15 @@
 require("dotenv").config();
 const express = require("express");
 const { Sequelize, DataTypes } = require("sequelize");
+const bodyparser = require('body-parser');
 
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
-
+app.use(bodyparser.urlencoded({ extended: true }));
+app.use(express.static("public"))
 const sequelize = new Sequelize(process.env.DB_URL, {
-  dialect: "postgres",
+  dialect: "postgresql",
   logging: false,
   dialectOptions: {
     ssl: {
@@ -39,10 +41,10 @@ const post = sequelize.define("post", {
 });
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.render("index.ejs");
 });
 
-app.post("/create-post", async (req, res) => {
+app.post("/submit", async (req, res) => {
   const { title, content } = req.body;
   try {
     const newPost = await post.create({ title, content });

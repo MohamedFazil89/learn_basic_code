@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/main.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="login-box reg">
+        <form action="/submit" method="post">
+          <h1>Register</h1>
+
+          <!-- <div class="role-container">
+            <label>
+              <input type="radio" name="role" value="host" required>
+              Host
+            </label>
+            <br>
+            <label>
+              <input type="radio" name="role" value="player" required>
+              Player
+            </label>
+          </div> -->
+
+          <div class="user-box">
+            <input type="text" name="title" required>
+            <label>username</label>
+          </div>
+          <div class="user-box">
+            <input type="text" name="content" required>
+            <label>Email</label>
+          </div>
+          
+
+
+
+          <button type="submit">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Submit
+          </button>
+        </form>
+      </div>
+      <!--  -->
+      <div class="login-box login" style="display: none;">
+        <h1>Login</h1>
+        <form action="/login" method="post">
+          <div class="role-container">
+            <label>
+              <input type="radio" name="role" value="host" required>
+              Host
+            </label>
+            <br>
+            <label>
+              <input type="radio" name="role" value="player" required>
+              Player
+            </label>
+          </div>
+          <div class="user-box">
+            <input type="text" name="username" required="">
+            <label>username</label>
+          </div>
+          <div class="user-box">
+            <input type="text" name="email" required>
+            <label>Email</label>
+          </div>
+          <div class="user-box">
+            <input type="password" name="password" required="">
+            <label>Password</label>
+            <a href="#" class="forgot">forgot password</a>
+
+          </div>
+          <button type="submit" class="loginbtn">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Submit
+          </button>
+        </form>
+      </div>
+      <a href="#" class="btn" onclick="toggle('.login','.reg');" id="title">Login</a>
+
+    <script>
+        function toggle(classname,regs) {
+            const login = document.querySelector(classname);
+            login.style.display = login.style.display === "none" ? "block" : "none";
+            document.getElementById('title').textContent = login.style.display === "block" ? "Register" : "Login";
+            const reg = document.querySelector(regs);
+            reg.style.display = login.style.display === "none" ? "block" : "none";
+            
+        }
+
+
+        function hide(classs) {
+            const login = document.querySelector(classs).style.display = "none";
+
+        }
+
+
+
+    </script>
+</body>
+
+</html>
