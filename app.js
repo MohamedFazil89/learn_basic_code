@@ -5,10 +5,13 @@ const bodyparser = require('body-parser');
 
 const app = express();
 const port = process.env.PORT || 3000;
-app.use(express.json());
 
+
+app.use(express.json());
 app.use(bodyparser.urlencoded({ extended: true }));
-app.use(express.static("public"))
+app.use(express.static("public"));
+
+
 const sequelize = new Sequelize(process.env.DB_URL, {
   dialect: "postgresql",
   logging: false,
@@ -55,7 +58,7 @@ app.post("/submit", async (req, res) => {
   }
 });
 
-app.get("/get-posts", async (req, res) => {
+app.get("/login", async (req, res) => {
   try {
     const allPosts = await post.findAll();
     res.json(allPosts);
@@ -63,6 +66,7 @@ app.get("/get-posts", async (req, res) => {
     console.log(err);
   }
 });
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
