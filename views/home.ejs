@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+  height: 100vh;
+  background: linear-gradient(
+    to right,
+    white 0%,
+    white 50%,
+    black 0%,
+    black 50%
+  );
+}
+
+h1 {
+  color: white;
+  white-space: nowrap;
+  font-size: 5rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+h1::before {
+  content: attr(data-heading);
+  position: absolute;
+  left: 0;
+  color: black;
+  width: 50%;
+  overflow: hidden;
+}
+
+    </style>
+</head>
+<body>
+    <h1 data-heading="WELCOME">WELCOME</h1>
+    
+</body>
+</html>

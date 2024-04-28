@@ -2,109 +2,146 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/main.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/main.css">
+  <title>Document</title>
 </head>
 
 <body>
-    <div class="login-box reg">
-        <form action="/submit" method="post">
-          <h1>Register</h1>
-
-          <!-- <div class="role-container">
-            <label>
-              <input type="radio" name="role" value="host" required>
-              Host
-            </label>
-            <br>
-            <label>
-              <input type="radio" name="role" value="player" required>
-              Player
-            </label>
-          </div> -->
-
-          <div class="user-box">
-            <input type="text" name="title" required>
-            <label>username</label>
-          </div>
-          <div class="user-box">
-            <input type="text" name="content" required>
-            <label>Email</label>
-          </div>
-          
 
 
+  <div class="login-box reg">
+    <form action="/submit" method="post">
+      <h1>Register</h1>
 
-          <button type="submit">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Submit
-          </button>
-        </form>
+      <div class="role-container">
+        <label>
+          <input type="radio" name="role" value="host" required class="role">
+          Host
+        </label>
+        <br>
+        <label>
+          <input type="radio" name="role" value="player" required>
+          Player
+        </label>
       </div>
-      <!--  -->
-      <div class="login-box login" style="display: none;">
-        <h1>Login</h1>
-        <form action="/login" method="get">
-          <div class="role-container">
-            <label>
-              <input type="radio" name="role" value="host" required>
-              Host
-            </label>
-            <br>
-            <label>
-              <input type="radio" name="role" value="player" required>
-              Player
-            </label>
-          </div>
-          <div class="user-box">
-            <input type="text" name="username" required="">
-            <label>username</label>
-          </div>
-          <div class="user-box">
-            <input type="text" name="email" required>
-            <label>Email</label>
-          </div>
-          <div class="user-box">
-            <input type="password" name="password" required="">
-            <label>Password</label>
-            <a href="#" class="forgot">forgot password</a>
 
-          </div>
-          <button type="submit" class="loginbtn">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Submit
-          </button>
-        </form>
+      <div class="user-box">
+        <input type="text" name="username" required id="name">
+        <label>username</label>
       </div>
-      <a href="#" class="btn" onclick="toggle('.login','.reg');" id="title">Login</a>
+      <div class="user-box">
+        <input type="password" name="password" required id="password">
+        <label>password</label>
+      </div>
+      <div class="user-box">
+        <input type="email" name="email" required id="mail">
+        <label>Email</label>
+        <span href="/#" class="btn" onclick="toggle('.login','.reg');"
+          id="title">already_an_user_<span>Login</span></span>
 
-    <script>
-        function toggle(classname,regs) {
-            const login = document.querySelector(classname);
-            login.style.display = login.style.display === "none" ? "block" : "none";
-            document.getElementById('title').textContent = login.style.display === "block" ? "Register" : "Login";
-            const reg = document.querySelector(regs);
-            reg.style.display = login.style.display === "none" ? "block" : "none";
-            
-        }
-
-
-        function hide(classs) {
-            const login = document.querySelector(classs).style.display = "none";
-
-        }
+      </div>
 
 
 
-    </script>
+
+      <button type="submit" onclick="message();">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Submit
+      </button>
+    </form>
+  </div>
+  <!--  -->
+  <div class="login-box login" style="display: none;">
+    <h1>Login</h1>
+    <form action="/login" method="post">
+      <div class="role-container">
+        <label>
+          <input type="radio" name="role" value="host" required>
+          Host
+        </label>
+        <br>
+        <label>
+          <input type="radio" name="role" value="player" required>
+          Player
+        </label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="username" required="">
+        <label>username</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="password" required>
+        <label>password</label>
+        <a href="/#" class="btn" onclick="toggle('.login','.reg');" id="title">New_user_<span>Register</span></a>
+
+      </div>
+
+      <button type="submit" class="loginbtn">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Submit
+      </button>
+    </form>
+  </div>
+
+  <form method="GET" class="infos" style="display: none;">
+
+    <div class="success-msg">
+      <button onclick="hide('.infos')">X</button>
+      <i class="fa fa-check"></i>
+      Succussfully Registered! 
+    </div>
+  </form>
+
+
+  <script>
+    var status = '<%= locals.state %>';
+
+    function toggle(classname, regs) {
+      const login = document.querySelector(classname);
+      login.style.display = login.style.display === "none" ? "block" : "none";
+      const reg = document.querySelector(regs);
+      reg.style.display = login.style.display === "none" ? "block" : "none";
+
+    }
+
+
+
+    function hide(classs) {
+      const login = document.querySelector(classs).style.display = "none";
+
+    }
+
+    const message = () => {
+      // document.querySelector(".infos").style.display = "block"
+      console.log(status);
+
+      const info = document.querySelector('.infos');
+      if (status) {
+        info.style.display = "block";
+        info.style.display = "flex";
+        setTimeout(() => {
+          info.style.display = "none";
+        }, 3000)
+
+
+      } else {
+        info.style.display = "none";
+        console.log("else")
+
+      }
+    }
+
+
+
+  </script>
 </body>
 
 </html>
